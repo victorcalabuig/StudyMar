@@ -1,15 +1,23 @@
-
+<!-- 
 <label>username: </label>
 <input type="text" name="username">
 <br><br>
 <label>password: </label>
 <input type="password" name="password">
-<!-- <a href="/StudyMarApp/victor/home">go to the homepage of victor</a>
- -->
- <a href="{% url 'home' user %}">go to the victor homepage </a>
+<a href="/StudyMarApp/victor/home">go to the homepage of victor</a> -->
 
+<!-- <a href="{% url 'StudyMarApp:home' user %}">go to the victor homepage </a> -->
 
-<form action="{% url 'auth' %}" method="get">
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'StudyMarApp:auth' %}" method="post">
+{% csrf_token %}
+	<label for="username">username: </label>
+	<input type="text" name="username">
+	<input type="submit" value="login">
+	<br><br>
+	<label for="password">password: </label>
+	<input type="password" name="password">
 	
 
 

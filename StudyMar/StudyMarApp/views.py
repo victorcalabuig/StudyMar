@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-from .models import User
+from .models import User, Exam
 from django.urls import reverse
 
 
@@ -41,4 +41,14 @@ def auth(request):
 
 
 def home(request, username):
-	return HttpResponse("You are in the home page of the user %s." % username)
+	# return HttpResponse("You are in the home page of the user %s." % username)
+	user = User.objects.get(username=username)
+	latest_exam_list = Exam.objects.filter(username_id=user.id)
+	context = {'latest_exam_list':latest_exam_list, 'user':user}
+	template = loader.get_template('StudyMarApp/home.html')
+	return HttpResponse(template.render(context, request))
+
+	
+
+
+

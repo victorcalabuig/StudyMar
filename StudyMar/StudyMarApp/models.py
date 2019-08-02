@@ -8,3 +8,12 @@ class User(models.Model):
 
 	def __str__(self):
 		return self.username
+
+class Exam(models.Model):
+	username = models.ForeignKey(User, on_delete=models.CASCADE)
+	course_name = models.CharField(max_length=100)
+	exam_date = models.DateTimeField('Examination Day')
+	pages = models.IntegerField()
+
+	def __str__(self):
+		return self.course_name

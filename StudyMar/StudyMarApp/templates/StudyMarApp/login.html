@@ -1,13 +1,16 @@
+
 <label>username: </label>
 <input type="text" name="username">
 <br><br>
 <label>password: </label>
 <input type="password" name="password">
+<!-- <a href="/StudyMarApp/victor/home">go to the homepage of victor</a>
+ -->
+ <a href="{% url 'home' user %}">go to the victor homepage </a>
 
-<!-- <form action="{">
+
+<form action="{% url 'auth' %}" method="get">
 	
 
 
-
-
-</form> -->
+</form>

@@ -10,12 +10,13 @@ from django.template import loader
 def login(request):
 	# return HttpResponse('estas en la vista de login')
 	template = loader.get_template('StudyMarApp/login.html')
-	context = {}
+	user = 'victor'
+	context = {'user':user}
 	return HttpResponse(template.render(context, request))
 
 
-def auth(request, username):
-	return HttpResponse("You are in the authentication for the user %s." % username)
+def auth(request):
+	return HttpResponse("You are in the authentication view")
 
 def home(request, username):
 	return HttpResponse("You are in the home page of the user %s." % username)

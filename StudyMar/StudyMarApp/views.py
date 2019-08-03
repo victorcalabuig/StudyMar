@@ -3,7 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .models import User, Exam
 from django.urls import reverse
-
+import datetime
+from django.utils import timezone
 
 
 # Create your views here.
@@ -47,6 +48,16 @@ def home(request, username):
 	context = {'latest_exam_list':latest_exam_list, 'user':user}
 	template = loader.get_template('StudyMarApp/home.html')
 	return HttpResponse(template.render(context, request))
+
+
+def detail(request, username, course):
+	# return HttpResponse("Estas en la vista detalle del curso %s del usuario %s." % (course, username))
+
+	# Calculate available (recomended) days (exam date -10)
+	exam = Exam.objects.get(course_name=course)
+	days = (exam.exam_date - timezone.now()).days
+	
+	return HttpResponse("Estas en la vista detalle del curso %s del usuario %s, y faltan %i días para el examen." % (course, username, days))
 
 	
 

@@ -9,6 +9,8 @@ urlpatterns = [
 
 	path('auth', views.auth, name='auth'),
 
+	path('<username>/detail/<course>', views.detail, name='detail'),
+
 	path('<username>/home', views.home, name='home'),
 
 	

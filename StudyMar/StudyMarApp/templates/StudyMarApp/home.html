@@ -1,5 +1,7 @@
+<h2>Cursos:</h2>
+
 <ul>
 {% for exam in latest_exam_list %}
-	<li><p>{{ exam.course_name }}</p></li>
+	<li><a href="{% url 'StudyMarApp:detail' user.username exam.course_name %}">{{ exam.course_name }}</a></li>
 {% endfor %}
 </ul>

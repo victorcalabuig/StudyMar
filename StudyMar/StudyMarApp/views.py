@@ -50,14 +50,45 @@ def home(request, username):
 	return HttpResponse(template.render(context, request))
 
 
+
+
+def registerExam(request, username):
+	# return HttpResponse("You are in the view to register a course.")
+	user = User.objects.get(username=username)
+	context = {'user':user}
+	template = loader.get_template('StudyMarApp/registerExam.html')
+	return HttpResponse(template.render(context, request))
+
+def saveExam(request, username):
+	# return HttpResponse("you are about to alter the db")
+	course_name = request.POST['course_name']
+	exam_date = request.POST['exam_date']
+	pages = request.POST['pages']
+	time_estimate = request.POST['time_estimate']
+
+
+	user = User.objects.get(username=username)
+	username_id = user.id
+
+	new_exam = Exam(time_estimate=time_estimate, course_name=course_name, exam_date=exam_date, pages=pages, username_id=username_id)
+	new_exam.save()
+
+	return HttpResponseRedirect(reverse('StudyMarApp:home', args=(user.username,)))
+
+
+
 def detail(request, username, course):
 	# return HttpResponse("Estas en la vista detalle del curso %s del usuario %s." % (course, username))
 
 	# Calculate available (recomended) days (exam date -10)
 	exam = Exam.objects.get(course_name=course)
-	days = (exam.exam_date - timezone.now()).days
+	days = (exam.exam_date - timezone.now()).days - 10 
+	context = {'exam':exam}
+	template = loader.get_template('StudyMarApp/detail.html')
 	
-	return HttpResponse("Estas en la vista detalle del curso %s del usuario %s, y faltan %i días para el examen." % (course, username, days))
+	return HttpResponse(template.render(context, request))
+	
+	# return HttpResponse("Estas en la vista detalle del curso %s del usuario %s, y tienes %i días para aprenderte la teoría." % (course, username, days))
 
 	
 

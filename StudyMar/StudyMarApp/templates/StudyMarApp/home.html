@@ -5,3 +5,7 @@
 	<li><a href="{% url 'StudyMarApp:detail' user.username exam.course_name %}">{{ exam.course_name }}</a></li>
 {% endfor %}
 </ul>
+
+<br><br><br>
+
+<a href="{% url 'StudyMarApp:registerExam' user.username %}"><button>Register new course</button></a>

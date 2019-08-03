@@ -14,6 +14,7 @@ class Exam(models.Model):
 	course_name = models.CharField(max_length=100)
 	exam_date = models.DateTimeField('Examination Day')
 	pages = models.IntegerField()
+	time_estimate = models.IntegerField(default=40)
 
 	def __str__(self):
 		return self.course_name

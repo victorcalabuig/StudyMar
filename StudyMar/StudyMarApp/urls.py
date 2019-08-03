@@ -13,5 +13,8 @@ urlpatterns = [
 
 	path('<username>/home', views.home, name='home'),
 
+	path('<username>/registerExam', views.registerExam, name='registerExam'),
+
+	path('<username>/saveExam', views.saveExam, name='saveExam'), 
 	
 ]

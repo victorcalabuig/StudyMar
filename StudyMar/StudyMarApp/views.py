@@ -52,6 +52,20 @@ def home(request, username):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def registerExam(request, username):
 	# return HttpResponse("You are in the view to register a course.")
 	user = User.objects.get(username=username)
@@ -70,20 +84,66 @@ def saveExam(request, username):
 	user = User.objects.get(username=username)
 	username_id = user.id
 
-	new_exam = Exam(time_estimate=time_estimate, course_name=course_name, exam_date=exam_date, pages=pages, username_id=username_id)
+	new_exam = Exam(time_estimate=time_estimate, course_name=course_name, exam_date=exam_date, 
+		pages=pages, username_id=username_id)
 	new_exam.save()
+
 
 	return HttpResponseRedirect(reverse('StudyMarApp:home', args=(user.username,)))
 
 
 
-def detail(request, username, course):
-	# return HttpResponse("Estas en la vista detalle del curso %s del usuario %s." % (course, username))
 
-	# Calculate available (recomended) days (exam date -10)
+def registerSession(request, username):
+
+	user = User.objects.get(username=username)
+	latest_exam_list = Exam.objects.filter(username_id=user.id)
+
+
+
+
+	template = loader.get_template('StudyMarApp/registerSession.html')
+	context = {'user':user, 'latest_exam_list':latest_exam_list}
+
+	return HttpResponse(template.render(context, request))
+
+def saveSession(request, username): 
+	# user = User.objects.get(username=username)
+	# username_id = user.id
+
+	exam_id = request.POST['exam_id']
+
+
+	return HttpResponse("the selected course is %s" % exam_id)
+
+
+
+
+
+def detail(request, username, course):
+	
 	exam = Exam.objects.get(course_name=course)
-	days = (exam.exam_date - timezone.now()).days - 10 
-	context = {'exam':exam}
+	
+	# total amount of study time needed (aprox.)
+	time_estimate = exam.time_estimate
+	pages = exam.pages
+	total_study_time = time_estimate * pages
+
+	# Days left for the exam:
+	exam_date = exam.exam_date
+	days_left = (exam_date - timezone.now()).days
+
+	# Days to study (days for exam - 7, which are reserved to review and practice)
+	study_days = days_left - 7
+
+	# Amount of time to study each day 
+	study_per_day = int(total_study_time / study_days)
+
+
+
+
+	context = {'exam':exam, 'total_study_time':total_study_time, 'days_left':days_left, 
+	'study_days':study_days, 'study_per_day':study_per_day}
 	template = loader.get_template('StudyMarApp/detail.html')
 	
 	return HttpResponse(template.render(context, request))

@@ -1,0 +1,26 @@
+<h2>CONGRATULATIONS, now register your progress!</h2>
+
+
+<form action="{% url 'StudyMarApp:saveSession' user.username %}" method="post">
+{% csrf_token %}
+
+<label for="exam_id">For which exam did you study?</label>
+<select name="exam_id">
+	<option value selected>-----------</option>
+	{% for exam in latest_exam_list %}
+		<option value="{{ exam.id }}">{{ exam.course_name }}</option>
+	{% endfor %}
+</select> <br><br>
+
+<label for="pages_studied">How many pages did you study? </label>
+<input type="number" name="pages_studied"> <br><br>
+
+<label for="time_taken">How long did it took? </label>
+<input type="number" name="time_taken" placeholder="(in minutes)"> <br><br>
+
+<label for="session_date">Date: </label>
+<input type="datetime-local" name="session_date"> <br><br>
+
+<input type="submit" value="register session">
+
+</form>

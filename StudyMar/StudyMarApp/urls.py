@@ -16,5 +16,10 @@ urlpatterns = [
 	path('<username>/registerExam', views.registerExam, name='registerExam'),
 
 	path('<username>/saveExam', views.saveExam, name='saveExam'), 
+
+	path('<username>/registerSession', views.registerSession, name='registerSession'),
+
+	path('<username>/saveSession', views.saveSession, name='saveSession'),
+
 	
 ]

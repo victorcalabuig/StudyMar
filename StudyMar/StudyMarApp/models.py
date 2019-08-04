@@ -18,3 +18,10 @@ class Exam(models.Model):
 
 	def __str__(self):
 		return self.course_name
+
+class Session(models.Model):
+	username = models.ForeignKey(User, on_delete=models.CASCADE)
+	exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
+	pages_studied = models.IntegerField()
+	time_taken = models.IntegerField()
+	session_date = models.DateTimeField()

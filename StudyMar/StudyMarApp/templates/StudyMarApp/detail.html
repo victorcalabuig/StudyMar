@@ -1,4 +1,34 @@
 <h1>{{ exam.course_name }}</h1>
 
-<p>You must study <strong>{{ study_per_day }}</strong> minutes 
-	for the next <strong>{{ study_days }}</strong> days.</p>
+<h3>Exam information:</h3>
+<ul>
+	<li>Exam date: {{ exam.exam_date }} ({{ days_left_exam }} days left)</li>
+	<li>Total pages: {{ exam.pages }}</li>
+</ul>
+
+<h3>Study Plan</h3>
+<ul>
+	<li>For the next {{ days_left_study }} days:</li>
+	<ul>
+		<li>Study <strong>{{ study_per_day }}</strong> minutes each day.</li>
+		<br>
+	</ul>
+	<li>Use the remaining 7 days to review</li>
+</ul>
+
+<h3>Progress</h3>
+<ul>
+	<li>Pages studied so far: {{ total_pages_studied }}/{{ exam.pages }} ({{ progress_percentage }}%)</li>
+	<li>Time dedicated so far: {{ total_dedicated_time }} hours.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+<!-- <p>You must study <strong>{{ study_per_day }}</strong> minutes 
+	for the next <strong>{{ study_days }}</strong> days.</p> -->

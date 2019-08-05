@@ -25,3 +25,4 @@ class Session(models.Model):
 	pages_studied = models.IntegerField()
 	time_taken = models.IntegerField()
 	session_date = models.DateTimeField()
+	speed = models.IntegerField(default=40)

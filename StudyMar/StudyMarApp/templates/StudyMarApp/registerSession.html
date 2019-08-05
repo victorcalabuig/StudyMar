@@ -1,5 +1,6 @@
 <h2>CONGRATULATIONS, now register your progress!</h2>
 
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="{% url 'StudyMarApp:saveSession' user.username %}" method="post">
 {% csrf_token %}

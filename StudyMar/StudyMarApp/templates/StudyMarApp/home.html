@@ -1,0 +1,11 @@
+{% if latest_exam_list %}
+	<h3>Exámenes actuales:</h3>
+	{% for exam in latest_exam_list %}
+		<ul>
+			<li>{{ exam }}</li>
+		</ul>
+	{% endfor %}
+
+{% else %}
+	<p>no exams added yet</p>
+{% endif %}

@@ -26,3 +26,7 @@ class Session(models.Model):
 	time_taken = models.IntegerField()
 	session_date = models.DateTimeField()
 	speed = models.IntegerField(default=40)
+
+	def __str__(self):
+		sess = str(self.session_date) + " - " + str(self.exam)
+		return sess
